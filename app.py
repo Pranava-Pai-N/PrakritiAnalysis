@@ -9,6 +9,13 @@ import os
 
 app = FastAPI()
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  
+    allow_credentials=True,
+    allow_methods=["*"],  
+    allow_headers=["*"],  
+)
 # Load models
 model = joblib.load("prakrithi_xgboost_model.pkl")
 encoder = joblib.load("onehot_encoder.pkl")
