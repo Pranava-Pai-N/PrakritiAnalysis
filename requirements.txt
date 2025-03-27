@@ -5,3 +5,4 @@ pandas
 numpy
 fpdf
 scikit-learn
+xgboost
