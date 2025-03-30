@@ -84,7 +84,10 @@ def generate_pdf(data: PrakrithiRequest):
             "Name": data.Name,
             "Age": data.Age,
             "Gender": data.Gender,
-            "Dominant_Prakrithi": f"**{prakrithi}**",
+            "Dominant_Prakrithi": {
+                "text":prakrithi,
+                "style":"bold"
+            },
             "Body_Constituents": {
                 "Body_Type": data.Body_Type,
                 "Skin_Type": data.Skin_Type,
