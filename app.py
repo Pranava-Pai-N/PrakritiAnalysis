@@ -92,28 +92,84 @@ def generate_pdf(data: PrakrithiRequest):
                 "Thirst_Level": data.Thirst_Level,
                 "Sleep_Pattern": data.Sleep_Quality,
             },
-            "Potential_Health_Concerns": [
-                "Acidity & Gastric Issues",
-                "Skin Rashes & Acne",
-                "Liver Disorders",
-                "Obesity & Joint Pain"
-            ],
-            "Recommendations": {
+        }
+
+        if prakrithi == "Vata":
+            response["Recommendations"] = {
                 "Dietary_Guidelines": [
-                    "Avoid spicy, oily foods",
-                    "Eat cooling and light foods like cucumber, watermelon",
-                    "Reduce dairy intake"
+                    "Eat warm, cooked foods like soups and porridges.",
+                    "Include healthy fats (ghee, sesame oil).",
+                    "Prefer sweet, grounding foods (root vegetables, bananas)."
                 ],
                 "Lifestyle_Suggestions": [
-                    "Regular meditation & stress management",
-                    "Moderate exercise like yoga"
+                    "Maintain a consistent daily routine (fixed sleep & meals).",
+                    "Practice gentle exercises like yoga and walking.",
+                    "Apply warm oil massage (Abhyanga) with sesame oil."
                 ],
                 "Ayurvedic_Herbs_Remedies": {
-                    "For_Digestion": ["Triphala", "Aloe Vera Juice"],
-                    "For_Skin": ["Neem", "Turmeric"]
+                    "Triphala – Supports digestion.",
+                    "Ashwagandha – Reduces stress.",
+                    "Aloe Vera & Sesame Oil – Nourish skin and hair."
                 }
             }
-        }
+            response["Potential_Health_Concerns"]={
+                "Digestive issues – Gas, bloating, constipation",
+                "Joint problems – Dryness, stiffness, arthritis",
+                "Anxiety & stress – Nervousness, sleep disturbances"
+            }
+            
+        elif prakrithi == "Pitta":
+            response["Recommendations"] = {
+                "Dietary_Guidelines": [
+                    "Eat cooling foods like cucumber, coconut water, and leafy greens.",
+                    "Avoid spicy, oily, and acidic foods (chili, fried foods, excess citrus).",
+                    "Stay hydrated with herbal teas (rose, fennel, coriander)."
+                ],
+                "Lifestyle_Suggestions": [
+                    "Maintain cool environments and avoid excessive heat.",
+                    "Practice calming exercises like yoga and meditation.",
+                    "Engage in stress-relieving activities like deep breathing and nature walks."
+                ],
+                "Ayurvedic_Herbs_Remedies": {
+                    "Amla – Supports digestion and reduces acidity.",
+                    "Aloe Vera – Cools and soothes skin.",
+                    "Rose Water – Refreshes and balances Pitta heat."
+                }
+            }
+            
+            response["Potential_Health_Concerns"]={
+                "Acidity & ulcers – Heartburn, acid reflux",
+                "Skin issues – Rashes, acne, inflammation",
+                "Anger & irritability – Prone to stress and mood swings"
+            }
+            
+            
+        elif prakrithi == "Kapha":
+            response["Recommendations"] = {
+                "Dietary_Guidelines": [
+                    "Eat light, warm foods like barley, millet, and steamed vegetables.",
+                    "Avoid heavy, oily, and sweet foods (fried foods, dairy, excess sugar).",
+                    "Include spices like ginger, black pepper, and turmeric to boost metabolism."
+                ],
+                "Lifestyle_Suggestions": [
+                    "Engage in regular physical activity (brisk walking, cardio, strength training).",
+                    "Avoid daytime naps to prevent sluggishness.",
+                    "Stay mentally active with stimulating activities and social engagement."
+                ],
+                "Ayurvedic_Herbs_Remedies": {
+                    "Ginger – Improves digestion and boosts metabolism.",
+                    "Black Pepper – Reduces mucus buildup and enhances circulation.",
+                    "Turmeric – Supports immunity and reduces inflammation."
+                }
+            }
+            
+            response["Potential_Health_Concerns"]={
+                "Weight gain & sluggish metabolism – Slow digestion, obesity",
+                "Respiratory issues – Congestion, mucus buildup, sinus problems",
+                "Lethargy & depression – Lack of motivation, drowsiness"
+            }
+            
+            
         return response
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
