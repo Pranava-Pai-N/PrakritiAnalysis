@@ -6,3 +6,4 @@ numpy
 fpdf
 scikit-learn
 xgboost
+dotenv
