@@ -57,7 +57,7 @@ class PrakrithiRequest(BaseModel):
 def read_root():
     return {"message": "Welcome to Prakrithi Analysis API!"}
 
-@app.post("/generate_pdf/")
+@app.post("/generate_pdf")
 def generate_pdf(data: PrakrithiRequest):
     try:
         df = pd.DataFrame([data.dict()])
