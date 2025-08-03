@@ -11,6 +11,8 @@ from dotenv import load_dotenv
 app = FastAPI()
 load_dotenv() 
 
+premium_key = os.getenv("PRAKRITHI_PREMIUM_API_KEY")
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  
@@ -59,6 +61,11 @@ def read_root():
 
 @app.post("/generate_pdf")
 def generate_pdf(data: PrakrithiRequest):
+    if not data.ApiKey:
+        raise HTTPException(
+            status_code=400,
+            detail="Please enter a valid API-Key to continue with the analysis."
+        )
     try:
         df = pd.DataFrame([data.dict()])
 
@@ -95,7 +102,7 @@ def generate_pdf(data: PrakrithiRequest):
                     "Sleep_Pattern": data.Sleep_Quality,
                 },
             }
-        if data.ApiKey ==os.getenv("PREMIUM_API_KEY"):
+        if data.ApiKey ==premium_key:
             if prakrithi == "Vata":
                         response["Recommendations"] = {
                             "Dietary_Guidelines": [
@@ -170,7 +177,11 @@ def generate_pdf(data: PrakrithiRequest):
                             "Respiratory issues – Congestion, mucus buildup, sinus problems",
                             "Lethargy & depression – Lack of motivation, drowsiness"
                         ]
-                    
+        
+        else:
+            response["Recommendations"]={
+                "Subscribe to Premium for Personalized Health Recommendations"
+            }
             
         return response
     except Exception as e:
