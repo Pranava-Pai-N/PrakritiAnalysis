@@ -180,8 +180,13 @@ def generate_pdf(data: PrakrithiRequest):
         
         else:
             response["Recommendations"]={
-                "Subscribe to Premium for Personalized Health Recommendations"
+                "Dietary_Guidelines":[],
+                "Lifestyle_Suggestions":[],
+                "Ayurvedic_Herbs_Remedies":[]
             }
+            
+            response["Potential_Health_Concerns"]=[]
+            
             
         return response
     except Exception as e:
